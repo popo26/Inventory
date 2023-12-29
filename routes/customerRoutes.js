@@ -7,7 +7,7 @@ router.get("/", (req, res) => {
   Controllers.customerController.getCustomers(res);
 });
 
-router.get("/customer/:id", (req, res) => {
+router.get("/:id", (req, res) => {
   Controllers.customerController.getProductFromCustomer(req, res);
 });
 

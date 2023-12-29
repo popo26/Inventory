@@ -1,6 +1,7 @@
 const { DataTypes, Model } = require("sequelize");
 let dbConnect = require("../database/dbConnect");
 const sequelizeInstance = dbConnect.Sequelize;
+const Customer = require("./customer");
 
 class Order extends Model {}
 
@@ -13,14 +14,13 @@ Order.init(
       autoIncrement: true,
       primaryKey: true,
     },
-    customerId:{
-       type:DataTypes.INTEGER,
-       references:{
-        model:Customer,
-        key:"id",
-       } 
-    }
-
+    customerId: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: Customer,
+        key: "id",
+      },
+    },
   },
   {
     sequelize: sequelizeInstance,

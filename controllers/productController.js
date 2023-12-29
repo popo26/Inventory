@@ -1,6 +1,6 @@
-
 "use strict";
 const Models = require("../models");
+const Sequelize = require("sequelize");
 
 const getProducts = (res) => {
   Models.Product.findAll({})
@@ -20,7 +20,7 @@ const getCustomerFromProduct = (req, res) => {
     include: Models.Customer,
   })
     .then(function (data) {
-      res.send({ result: 200, data: data.students });
+      res.send({ result: 200, data: data });
     })
     .catch((err) => {
       throw err;
@@ -37,14 +37,49 @@ const createProduct = (data, res) => {
     });
 };
 
+const getProductByID = (req, res) => {
+  const productId = req.params.id;
+
+  Models.Product.findOne({
+    where: {
+      id: productId,
+    },
+  })
+    .then((data) => res.send({ result: 200, data: data }))
+    .catch((err) => {
+      console.log(err);
+      res.send({ result: 500, error: err.message });
+    });
+};
+
+const getProductByCategoryName = async (req, res) => {
+  const categoryName = req.params.categoryName;
+
+  console.log("category name", categoryName);
+  const Op = Sequelize.Op;
+  const operatorsAliases = {
+    $like: Op.like,
+    $not: Op.not,
+  };
+  const results = await Models.Product.findAll({
+    where: {
+      category: { [Op.like]: "%" + categoryName + "%" },
+    },
+  });
+
+  if (results) {
+    res.send({ result: 200, data: results });
+    console.log("results", results);
+  }
+};
+
 module.exports = {
   getProducts,
   getCustomerFromProduct,
   createProduct,
+  getProductByID,
+  getProductByCategoryName,
 };
-
-
-
 
 // "use strict";
 

@@ -8,6 +8,9 @@ const sequelize = dbConnect.Sequelize;
 const initDb = async () => {
   await _populateProductTable();
   await _populateCustomerTable();
+  await _populateOrderTable();
+  await _populateCustomerProductTable();
+  await _populateOrderProductTable();
 };
 
 /**
@@ -19,13 +22,12 @@ const _populateProductTable = async () => {
     // Only populate the table if empty
     if (result === 0) {
       fetch("https://dummyjson.com/products")
-        // fetch("https://randomuser.me/api/?results=10&inc=name,dob&nat=au,nz,fr")
         .then((response) => response.json())
         .then((data) => {
           // Extract data from the API and only save what I am interested in
 
           let productDataToInsert = new Array();
-          data.results.forEach((item) => {
+          data.products.forEach((item) => {
             productDataToInsert.push({
               title: item.title,
               description: item.description,
@@ -66,6 +68,7 @@ const _populateCustomerTable = async () => {
           Models.Customer.bulkCreate(customersDataToInsert);
           // Here I need to populate the Student_Cohort after Student and Cohort have been populated.
           _populateCustomerProductTable();
+          _populateOrderProductTable();
         });
     }
   });
@@ -79,6 +82,35 @@ const _populateCustomerProductTable = async () => {
         "./database/customer_products.sql",
         "utf8"
       );
+      sequelize.query(sql_string).then(([results, metadata]) => {
+        // Results will be an empty array and metadata will contain the number of affected rows.
+        console.log("results = ", results);
+      });
+    }
+  });
+};
+
+const _populateOrderProductTable = async () => {
+  Models.Order_Product.count().then((result) => {
+    // Only populate the table if empty
+    if (result === 0) {
+      const sql_string = fs.readFileSync(
+        "./database/order_products.sql",
+        "utf8"
+      );
+      sequelize.query(sql_string).then(([results, metadata]) => {
+        // Results will be an empty array and metadata will contain the number of affected rows.
+        console.log("results = ", results);
+      });
+    }
+  });
+};
+
+const _populateOrderTable = async () => {
+  Models.Order.count().then((result) => {
+    // Only populate the table if empty
+    if (result === 0) {
+      const sql_string = fs.readFileSync("./database/orders.sql", "utf8");
       sequelize.query(sql_string).then(([results, metadata]) => {
         // Results will be an empty array and metadata will contain the number of affected rows.
         console.log("results = ", results);

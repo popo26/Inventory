@@ -6,7 +6,7 @@ router.get("/", (req, res) => {
   Controllers.productController.getProducts(res);
 });
 
-router.get("/product/:id", (req, res) => {
+router.get("/:id", (req, res) => {
   Controllers.productController.getCustomerFromProduct(req, res);
 });
 
@@ -18,13 +18,13 @@ router.post("/create", (req, res) => {
 //   Controllers.productController.getProducts(req, res);
 // });
 
-// router.get("/search/:id", (req, res) => {
-//   Controllers.productController.getProductByID(req, res);
-// });
+router.get("/search/:id", (req, res) => {
+  Controllers.productController.getProductByID(req, res);
+});
 
-// router.get("/search", (req, res) => {
-//   Controllers.productController.getProductByName(req, res);
-// });
+router.get("/search/category/:categoryName", (req, res) => {
+  Controllers.productController.getProductByCategoryName(req, res);
+});
 
 // router.post("/create", (req, res) => {
 //   Controllers.productController.postProduct(req.body, res);

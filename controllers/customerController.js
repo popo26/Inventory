@@ -15,32 +15,32 @@ const getCustomers = (res) => {
 };
 
 const getProductFromCustomer = (req, res) => {
-  sequelize
-    .query(
-      `SELECT * FROM cohorts INNER JOIN student_cohorts
-       ON student_cohorts.cohortId = cohorts.id WHERE student_cohorts.studentId = ` +
-        req.params.id,
-      { type: QueryTypes.SELECT }
-    )
-    .then((data) => {
-      console.log("Raw query = ", data);
-      res.json(data);
-    });
+//   sequelize
+//     .query(
+//       `SELECT * FROM cohorts INNER JOIN student_cohorts
+//        ON student_cohorts.cohortId = cohorts.id WHERE student_cohorts.studentId = ` +
+//         req.params.id,
+//       { type: QueryTypes.SELECT }
+//     )
+//     .then((data) => {
+//       console.log("Raw query = ", data);
+//       res.json(data);
+//     });
 
-  /*
-  Models.Student.findOne({
+  
+  Models.Customer.findOne({
     where: {
       id: req.params.id,
     },
-    include: Models.Cohort,
+    include: Models.Product,
   })
     .then(function (data) {
-      res.json(data.cohorts);
+      res.json(data);
     })
     .catch((err) => {
       throw err;
     });
-    */
+    
 };
 
 const createCustomer = (data, res) => {
