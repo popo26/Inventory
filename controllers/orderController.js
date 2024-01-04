@@ -45,8 +45,19 @@ const createOrder = (data, res) => {
     });
 };
 
+const deleteOrder = (req, res) => {
+  Models.Order.destroy({ where: { id: req.params.id } })
+    .then(function (data) {
+      res.send({ result: 200, data: data });
+    })
+    .catch((err) => {
+      throw err;
+    });
+};
+
 module.exports = {
   getOrders,
   getCustomerNameFromOrderNumber,
   createOrder,
+  deleteOrder
 };

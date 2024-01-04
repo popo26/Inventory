@@ -14,4 +14,9 @@ router.post("/create", (req, res) => {
   Controllers.orderController.createOrder(req.body, res);
 });
 
+router.delete("/delete/:id", (req, res) => {
+  Controllers.orderController.deleteOrder(req, res);
+});
+
+
 module.exports = router;
