@@ -1,0 +1,422 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Inventory",
+    "description": "Inventory Application API"
+  },
+  "host": "127.0.0.1:8082",
+  "basePath": "/api",
+  "tags": [
+    {
+      "name": "Inventory",
+      "description": "API for Inventory in the system"
+    }
+  ],
+  "schemes": ["http"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+
+  "paths": {
+    "/customers": {
+      "get": {
+        "tags": ["Customer Service"],
+        "summary": "Get All customers",
+
+        "responses": {
+          "200": {
+            "description": "This service retrieves ALL customers"
+          }
+        }
+      }
+    },
+
+    "/customers/{id}": {
+      "get": {
+        "tags": ["Customer Service"],
+        "summary": "Get Products Per Customer",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Customer ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "This service gets products associated per customer"
+          }
+        }
+      }
+    },
+
+    "/customers/create": {
+      "post": {
+        "tags": ["Customer Service"],
+        "summary": "Create a customer",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "customer",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "firstName": {
+                  "type": "string"
+                },
+                "lastName": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "This service creates a customer"
+          }
+        }
+      }
+    },
+    "/customers/search/{id}": {
+      "get": {
+        "tags": ["Customer Service"],
+        "summary": "Get Customer By ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Customer ID"
+          }
+        ],
+
+        "responses": {
+          "200": {
+            "description": "This service retrieves a customer by ID"
+          }
+        }
+      }
+    },
+    "/customers/firstName/{firstName}": {
+      "get": {
+        "tags": ["Customer Service"],
+        "summary": "Get Customer By firstName",
+        "parameters": [
+          {
+            "name": "firstName",
+            "in": "path",
+            "description": "Customer firstName"
+          }
+        ],
+
+        "responses": {
+          "200": {
+            "description": "This service retrieves customers by firstName"
+          }
+        }
+      }
+    },
+
+    "/customers/update/{id}": {
+      "put": {
+        "tags": ["Customer Service"],
+        "summary": "Update Customer By ID",
+        "parameters": [
+          {
+            "name": "firstName",
+            "in": "path",
+            "description": "Customer firstName"
+          },
+          {
+            "in": "body",
+            "name": "customer",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "firstName": {
+                  "type": "string"
+                },
+                "lastName": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+
+        "responses": {
+          "200": {
+            "description": "This service updating existing customer"
+          }
+        }
+      }
+    },
+
+    "/customers/delete/{id}": {
+      "delete": {
+        "tags": ["Customer Service"],
+        "summary": "DELETE a customer",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Customer ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "This service deletes an customer."
+          }
+        }
+      }
+    },
+
+    "/products": {
+      "get": {
+        "tags": ["Product Service"],
+        "summary": "Get All Products",
+
+        "responses": {
+          "200": {
+            "description": "This service retrieves ALL customers"
+          }
+        }
+      }
+    },
+
+    "/products/{id}": {
+      "get": {
+        "tags": ["Product Service"],
+        "summary": "Get Products Per Customer",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Customer ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "This service gets products associated per customer"
+          }
+        }
+      }
+    },
+
+    "/products/create": {
+      "post": {
+        "tags": ["Product Service"],
+        "summary": "Create a Product",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "product",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "type": "string"
+                },
+                "description": {
+                  "type": "string"
+                },
+                "price": {
+                  "type": "float"
+                },
+                "stock": {
+                  "type": "integer"
+                },
+                "category": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "This service creates a product"
+          }
+        }
+      }
+    },
+    "/products/search/{id}": {
+      "get": {
+        "tags": ["Product Service"],
+        "summary": "Get Product By ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Product ID"
+          }
+        ],
+
+        "responses": {
+          "200": {
+            "description": "This service retrieves a product by ID"
+          }
+        }
+      }
+    },
+    "/products/category/{categoryName}": {
+      "get": {
+        "tags": ["Product Service"],
+        "summary": "Get Products By Category Name",
+        "parameters": [
+          {
+            "name": "categoryName",
+            "in": "path",
+            "description": "Category Name, e.g, phone"
+          }
+        ],
+
+        "responses": {
+          "200": {
+            "description": "This service retrieves products by category name"
+          }
+        }
+      }
+    },
+
+    "/products/update/{id}": {
+      "put": {
+        "tags": ["Product Service"],
+        "summary": "Update Customer By ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Product ID"
+          },
+          {
+            "in": "body",
+            "name": "product",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "type": "string"
+                },
+                "description": {
+                  "type": "string"
+                },
+                "price": {
+                  "type": "float"
+                },
+                "stock": {
+                  "type": "integer"
+                },
+                "category": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+
+        "responses": {
+          "200": {
+            "description": "This service updating existing product"
+          }
+        }
+      }
+    },
+
+    "/products/delete/{id}": {
+      "delete": {
+        "tags": ["Product Service"],
+        "summary": "DELETE a customer",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Product ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "This service deletes a product."
+          }
+        }
+      }
+    },
+
+    "/orders": {
+      "get": {
+        "tags": ["Order Service"],
+        "summary": "Get All orders",
+
+        "responses": {
+          "200": {
+            "description": "This service retrieves ALL orders"
+          }
+        }
+      }
+    },
+
+    "/orders/{id}": {
+      "get": {
+        "tags": ["Order Service"],
+        "summary": "Get an Order By Order ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Order ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "This service gets an Order by Order ID"
+          }
+        }
+      }
+    },
+
+    "/orders/create": {
+      "post": {
+        "tags": ["Order Service"],
+        "summary": "Create an order",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "order",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "customerId": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "This service creates an order"
+          }
+        }
+      }
+    },
+
+    "/orders/delete/{id}": {
+      "delete": {
+        "tags": ["Order Service"],
+        "summary": "DELETE an order",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Order ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "This service deletes an order."
+          }
+        }
+      }
+    }
+  }
+}
