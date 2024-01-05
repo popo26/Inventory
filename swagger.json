@@ -171,33 +171,33 @@
       }
     },
     "/customers/addProduct": {
-        "post": {
-          "tags": ["Customer Service"],
-          "summary": "Add a product to Customer's cart",
-          "parameters": [
-            {
-                "in": "body",
-                "name": "order",
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "customerId": {
-                      "type": "integer"
-                    },
-                    "productId": {
-                      "type": "integer"
-                    }
-                  }
+      "post": {
+        "tags": ["Customer Service"],
+        "summary": "Add a product to Customer's cart",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "order",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "customerId": {
+                  "type": "integer"
+                },
+                "productId": {
+                  "type": "integer"
                 }
               }
-          ],
-          "responses": {
-            "200": {
-              "description": "This service deletes an customer."
             }
           }
+        ],
+        "responses": {
+          "200": {
+            "description": "This service deletes an customer."
+          }
         }
-      },
+      }
+    },
 
     "/products": {
       "get": {
@@ -449,28 +449,70 @@
         }
       }
     },
-    "/orders/customer/{customerId}/order/{orderId}/products":{
-        "get": {
-            "tags": ["Order Service"],
-            "summary": "Get a list of Order items by Order ID",
-            "parameters": [
-              {
-                "name": "customerId",
-                "in": "path",
-                "description": "Customer ID"
-              },
-              {
-                "name": "orderId",
-                "in": "path",
-                "description": "Order ID"
-              }
-            ],
-            "responses": {
-              "200": {
-                "description": "This service gets a list of Order items by Order ID"
-              }
-            }
+    "/orders/customer/{customerId}/order/{orderId}/products": {
+      "get": {
+        "tags": ["Order Service"],
+        "summary": "Get a list of Order items by Order ID",
+        "parameters": [
+          {
+            "name": "customerId",
+            "in": "path",
+            "description": "Customer ID"
+          },
+          {
+            "name": "orderId",
+            "in": "path",
+            "description": "Order ID"
           }
+        ],
+        "responses": {
+          "200": {
+            "description": "This service gets a list of Order items by Order ID"
+          }
+        }
+      }
+    },
+    "/orders/customer/{firstName}": {
+      "get": {
+        "tags": ["Order Service"],
+        "summary": "Get a list of Order IDs from Customer's First Name",
+        "parameters": [
+          {
+            "name": "firstName",
+            "in": "path",
+            "description": "Customer's fist name. Needs to be exact match. Case insensitive."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "This service gets a list of Order IDs from Customer's First Name."
+          }
+        }
+      }
+    },
+
+    "/orders/addProductToOrder/{orderId}/{productId}": {
+      "post": {
+        "tags": ["Order Service"],
+        "summary": "Associate Product to an existing Order",
+        "parameters": [
+          {
+            "name": "orderId",
+            "in": "path",
+            "description": "Find Order ID first by [/orders] or [/orders/customer/{firstName}]. "
+          },
+          {
+            "name": "productId",
+            "in": "path",
+            "description": "Find Product ID first by [/products]"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "This service add a product to an existing order."
+          }
+        }
+      }
     }
   }
 }

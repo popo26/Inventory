@@ -22,5 +22,12 @@ router.get("/customer/:customerId/order/:orderId/products", (req, res) => {
   Controllers.orderController.getProductsPerOrder(req, res)
 })
 
+router.get("/customer/:firstName", (req,res)=>{
+  Controllers.orderController.getOrderIDsFromCustomerFirstName(req,res)
+})
+
+router.post("/addProductToOrder/:orderId/:productId", (req,res)=>{
+  Controllers.orderController.addProductToOrder(req,res)
+})
 
 module.exports = router;
