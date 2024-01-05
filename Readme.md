@@ -15,8 +15,8 @@ Here are some questions to cover during your presentations:
 - Give a high level overview of your application and its features --> 
 - Where does the data come from (external API)? -->[DummyJSON](https://dummyjson.com/) & [Random User Generator](https://randomuser.me/)
 - How is this data inserted into your database? --> During the initialization of application. If there are no data, this data gets inserted.
-- How is the data structured (into tables or collections)? --> Please refer to Planning folder.
+- How is the data structured (into tables or collections)? --> Please refer to `Planning` folder.
 - How is the application code structured (MVC model)? --> Yes. Please refer to my codebase.
-- Does your application cover all 4 CRUD operations? How? -->
+- Does your application cover all 4 CRUD operations? How? --> Yes. [Swagger](http://127.0.0.1:8082/api-docs/)
 - How might using a database instead of an external API directly benefit an application? --> Less Latency, Available offline, Controlled access.
 - How might you extend the features of your application in future? --> Add relationship between Order and Products Per Customer. Payment functionality.
