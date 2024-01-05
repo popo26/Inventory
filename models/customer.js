@@ -33,7 +33,7 @@ Customer.init(
   }
 );
 
-Customer.hasMany(Order, { foreignKey: 'customerId' }); // Assuming 'customerId' is the foreign key in the Order model
+Customer.hasMany(Order, { foreignKey: 'customerId' }); 
 
 
 module.exports = Customer;

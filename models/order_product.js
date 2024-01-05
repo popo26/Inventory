@@ -3,7 +3,6 @@ const sequelizeInstance = dbConnect.Sequelize;
 
 const Order = require("./order")
 const Product = require("./product")
-//const Order = require("./order")
 
 
 

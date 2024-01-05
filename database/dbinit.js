@@ -1,7 +1,6 @@
 "use strict";
 const dbConnect = require("./dbConnect");
 const Models = require("../models");
-//const moment = require("moment");
 const fs = require("fs-extra");
 const sequelize = dbConnect.Sequelize;
 
@@ -14,7 +13,7 @@ const initDb = async () => {
 };
 
 /**
- *  Populate the product table with 10 users taken from a random user API
+ *  Populate the product table taken from a dummy json API (30 products)
  */
 const _populateProductTable = async () => {
   // Check if student table is empty
@@ -38,18 +37,15 @@ const _populateProductTable = async () => {
           });
 
           Models.Product.bulkCreate(productDataToInsert);
-          // Here I need to populate the Student_Cohort after Student and Cohort have been populated.
-          // _populateStudentCohortsTable();
         });
     }
   });
 };
 
 /**
- *  Populate the student table with 10 users taken from a random user API
+ *  Populate the product table with 10 users taken from a random user API
  */
 const _populateCustomerTable = async () => {
-  // Check if student table is empty
   Models.Customer.count().then((result) => {
     // Only populate the table if empty
     if (result === 0) {
@@ -66,7 +62,7 @@ const _populateCustomerTable = async () => {
           });
 
           Models.Customer.bulkCreate(customersDataToInsert);
-          // Here I need to populate the Student_Cohort after Student and Cohort have been populated.
+          // Here I need to populate the Customer_Product and Order_Product after Customer, Product, Order have been populated.
           _populateCustomerProductTable();
           _populateOrderProductTable();
         });

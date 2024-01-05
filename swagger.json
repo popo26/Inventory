@@ -50,6 +50,45 @@
       }
     },
 
+    "/customers/search/{id}": {
+      "get": {
+        "tags": ["Customer Service"],
+        "summary": "Get Customer By ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Customer ID"
+          }
+        ],
+
+        "responses": {
+          "200": {
+            "description": "This service retrieves a customer by ID"
+          }
+        }
+      }
+    },
+    "/customers/search/firstName/{firstName}": {
+      "get": {
+        "tags": ["Customer Service"],
+        "summary": "Get Customer By firstName",
+        "parameters": [
+          {
+            "name": "firstName",
+            "in": "path",
+            "description": "Find customer by partial match in first name."
+          }
+        ],
+
+        "responses": {
+          "200": {
+            "description": "This service retrieves customers by firstName"
+          }
+        }
+      }
+    },
+
     "/customers/create": {
       "post": {
         "tags": ["Customer Service"],
@@ -78,40 +117,30 @@
         }
       }
     },
-    "/customers/search/{id}": {
-      "get": {
+    "/customers/addProduct": {
+      "post": {
         "tags": ["Customer Service"],
-        "summary": "Get Customer By ID",
+        "summary": "Add a product to Customer's cart",
         "parameters": [
           {
-            "name": "id",
-            "in": "path",
-            "description": "Customer ID"
+            "in": "body",
+            "name": "order",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "customerId": {
+                  "type": "integer"
+                },
+                "productId": {
+                  "type": "integer"
+                }
+              }
+            }
           }
         ],
-
         "responses": {
           "200": {
-            "description": "This service retrieves a customer by ID"
-          }
-        }
-      }
-    },
-    "/customers/search/firstName/{firstName}": {
-      "get": {
-        "tags": ["Customer Service"],
-        "summary": "Get Customer By firstName",
-        "parameters": [
-          {
-            "name": "firstName",
-            "in": "path",
-            "description": "Customer firstName"
-          }
-        ],
-
-        "responses": {
-          "200": {
-            "description": "This service retrieves customers by firstName"
+            "description": "This service deletes an customer."
           }
         }
       }
@@ -170,34 +199,6 @@
         }
       }
     },
-    "/customers/addProduct": {
-      "post": {
-        "tags": ["Customer Service"],
-        "summary": "Add a product to Customer's cart",
-        "parameters": [
-          {
-            "in": "body",
-            "name": "order",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "customerId": {
-                  "type": "integer"
-                },
-                "productId": {
-                  "type": "integer"
-                }
-              }
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "This service deletes an customer."
-          }
-        }
-      }
-    },
 
     "/products": {
       "get": {
@@ -226,6 +227,45 @@
         "responses": {
           "200": {
             "description": "This service gets products associated per customer"
+          }
+        }
+      }
+    },
+
+    "/products/search/{id}": {
+      "get": {
+        "tags": ["Product Service"],
+        "summary": "Get Product By ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Product ID"
+          }
+        ],
+
+        "responses": {
+          "200": {
+            "description": "This service retrieves a product by ID"
+          }
+        }
+      }
+    },
+    "/products/search/category/{categoryName}": {
+      "get": {
+        "tags": ["Product Service"],
+        "summary": "Get Products By Category Name",
+        "parameters": [
+          {
+            "name": "categoryName",
+            "in": "path",
+            "description": "Category Name, e.g, phone"
+          }
+        ],
+
+        "responses": {
+          "200": {
+            "description": "This service retrieves products by category name"
           }
         }
       }
@@ -266,44 +306,6 @@
         "responses": {
           "200": {
             "description": "This service creates a product"
-          }
-        }
-      }
-    },
-    "/products/search/{id}": {
-      "get": {
-        "tags": ["Product Service"],
-        "summary": "Get Product By ID",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "description": "Product ID"
-          }
-        ],
-
-        "responses": {
-          "200": {
-            "description": "This service retrieves a product by ID"
-          }
-        }
-      }
-    },
-    "/products/search/category/{categoryName}": {
-      "get": {
-        "tags": ["Product Service"],
-        "summary": "Get Products By Category Name",
-        "parameters": [
-          {
-            "name": "categoryName",
-            "in": "path",
-            "description": "Category Name, e.g, phone"
-          }
-        ],
-
-        "responses": {
-          "200": {
-            "description": "This service retrieves products by category name"
           }
         }
       }
@@ -431,24 +433,30 @@
       }
     },
 
-    "/orders/delete/{id}": {
-      "delete": {
+    "/orders/addProductToOrder/{orderId}/{productId}": {
+      "post": {
         "tags": ["Order Service"],
-        "summary": "DELETE an order",
+        "summary": "Associate Product to an existing Order",
         "parameters": [
           {
-            "name": "id",
+            "name": "orderId",
             "in": "path",
-            "description": "Order ID"
+            "description": "Find Order ID first by [/orders] or [/orders/customer/{firstName}]. "
+          },
+          {
+            "name": "productId",
+            "in": "path",
+            "description": "Find Product ID first by [/products]"
           }
         ],
         "responses": {
           "200": {
-            "description": "This service deletes an order."
+            "description": "This service add a product to an existing order."
           }
         }
       }
     },
+
     "/orders/customer/{customerId}/order/{orderId}/products": {
       "get": {
         "tags": ["Order Service"],
@@ -491,25 +499,20 @@
       }
     },
 
-    "/orders/addProductToOrder/{orderId}/{productId}": {
-      "post": {
+    "/orders/delete/{id}": {
+      "delete": {
         "tags": ["Order Service"],
-        "summary": "Associate Product to an existing Order",
+        "summary": "DELETE an order",
         "parameters": [
           {
-            "name": "orderId",
+            "name": "id",
             "in": "path",
-            "description": "Find Order ID first by [/orders] or [/orders/customer/{firstName}]. "
-          },
-          {
-            "name": "productId",
-            "in": "path",
-            "description": "Find Product ID first by [/products]"
+            "description": "Order ID"
           }
         ],
         "responses": {
           "200": {
-            "description": "This service add a product to an existing order."
+            "description": "This service deletes an order."
           }
         }
       }
