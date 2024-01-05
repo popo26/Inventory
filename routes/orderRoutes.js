@@ -18,5 +18,9 @@ router.delete("/delete/:id", (req, res) => {
   Controllers.orderController.deleteOrder(req, res);
 });
 
+router.get("/customer/:customerId/order/:orderId/products", (req, res) => {
+  Controllers.orderController.getProductsPerOrder(req, res)
+})
+
 
 module.exports = router;

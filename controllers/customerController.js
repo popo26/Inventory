@@ -101,6 +101,27 @@ const deleteCustomer = (req, res) => {
     });
 };
 
+//Add a Product to Customer -- at the moment not allowing duplicate
+const addProductToCustomer = (req, res) => {
+  const { customerId, productId } = req.body;
+
+  Models.Customer_Product.create({
+    customerId: customerId,
+    productId: productId,
+  })
+    .then((customerProductInstance) => {
+      console.log(
+        "Record inserted into customer_product table:",
+        customerProductInstance
+      );
+      res.status(201).json({ success: true, data: customerProductInstance });
+    })
+    .catch((error) => {
+      console.error("Error inserting record", error);
+      res.status(500).json({ success: false, error: 'Internal Server Error' });
+    });
+};
+
 module.exports = {
   getCustomers,
   getProductsPerCustomer,
@@ -109,4 +130,5 @@ module.exports = {
   getCustomerByFirstName,
   updateCustomer,
   deleteCustomer,
+  addProductToCustomer,
 };

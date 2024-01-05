@@ -55,9 +55,32 @@ const deleteOrder = (req, res) => {
     });
 };
 
+const getProductsPerOrder = async (req, res)=>{
+  const customerId = req.params.customerId;
+  const orderId = req.params.orderId;
+
+  try {
+    // Fetch products associated with the order and customer
+    const products = await Models.Order.findOne({
+      where: { id: orderId, customerId: customerId },
+      include: [{ model: Models.Product }],
+    });
+
+    if (!products) {
+      return res.status(404).json({ message: "Order not found for the customer" });
+    }
+
+    res.status(200).json(products.products);
+  } catch (error) {
+    console.error("Error fetching products:", error);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+}
+
 module.exports = {
   getOrders,
   getCustomerNameFromOrderNumber,
   createOrder,
-  deleteOrder
+  deleteOrder,
+  getProductsPerOrder
 };

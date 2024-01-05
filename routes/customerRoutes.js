@@ -30,4 +30,8 @@ router.delete("/delete/:id", (req, res) => {
   Controllers.customerController.deleteCustomer(req, res);
 });
 
+router.post("/addProduct", (req, res) => {
+  Controllers.customerController.addProductToCustomer(req, res);
+});
+
 module.exports = router;

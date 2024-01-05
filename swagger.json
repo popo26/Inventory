@@ -97,7 +97,7 @@
         }
       }
     },
-    "/customers/firstName/{firstName}": {
+    "/customers/search/firstName/{firstName}": {
       "get": {
         "tags": ["Customer Service"],
         "summary": "Get Customer By firstName",
@@ -123,7 +123,7 @@
         "summary": "Update Customer By ID",
         "parameters": [
           {
-            "name": "firstName",
+            "name": "id",
             "in": "path",
             "description": "Customer firstName"
           },
@@ -170,6 +170,34 @@
         }
       }
     },
+    "/customers/addProduct": {
+        "post": {
+          "tags": ["Customer Service"],
+          "summary": "Add a product to Customer's cart",
+          "parameters": [
+            {
+                "in": "body",
+                "name": "order",
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "customerId": {
+                      "type": "integer"
+                    },
+                    "productId": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              }
+          ],
+          "responses": {
+            "200": {
+              "description": "This service deletes an customer."
+            }
+          }
+        }
+      },
 
     "/products": {
       "get": {
@@ -187,7 +215,7 @@
     "/products/{id}": {
       "get": {
         "tags": ["Product Service"],
-        "summary": "Get Products Per Customer",
+        "summary": "Get Customers per Product",
         "parameters": [
           {
             "name": "id",
@@ -220,14 +248,16 @@
                 "description": {
                   "type": "string"
                 },
-                "price": {
-                  "type": "float"
-                },
+
                 "stock": {
                   "type": "integer"
                 },
                 "category": {
                   "type": "string"
+                },
+                "price": {
+                  "type": "number",
+                  "multipleOf": 0.01
                 }
               }
             }
@@ -259,7 +289,7 @@
         }
       }
     },
-    "/products/category/{categoryName}": {
+    "/products/search/category/{categoryName}": {
       "get": {
         "tags": ["Product Service"],
         "summary": "Get Products By Category Name",
@@ -302,7 +332,8 @@
                   "type": "string"
                 },
                 "price": {
-                  "type": "float"
+                  "type": "number",
+                  "multipleOf": 0.01
                 },
                 "stock": {
                   "type": "integer"
@@ -358,7 +389,7 @@
     "/orders/{id}": {
       "get": {
         "tags": ["Order Service"],
-        "summary": "Get an Order By Order ID",
+        "summary": "Get Customer By Order ID",
         "parameters": [
           {
             "name": "id",
@@ -368,7 +399,7 @@
         ],
         "responses": {
           "200": {
-            "description": "This service gets an Order by Order ID"
+            "description": "This service gets Customer by Order ID"
           }
         }
       }
@@ -417,6 +448,29 @@
           }
         }
       }
+    },
+    "/orders/customer/{customerId}/order/{orderId}/products":{
+        "get": {
+            "tags": ["Order Service"],
+            "summary": "Get a list of Order items by Order ID",
+            "parameters": [
+              {
+                "name": "customerId",
+                "in": "path",
+                "description": "Customer ID"
+              },
+              {
+                "name": "orderId",
+                "in": "path",
+                "description": "Order ID"
+              }
+            ],
+            "responses": {
+              "200": {
+                "description": "This service gets a list of Order items by Order ID"
+              }
+            }
+          }
     }
   }
 }
