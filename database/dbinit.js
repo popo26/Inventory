@@ -7,8 +7,8 @@ const sequelize = dbConnect.Sequelize;
 const initDb = async () => {
   await _populateProductTable();
   await _populateCustomerTable();
-  await _populateOrderTable();
   await _populateCustomerProductTable();
+  await _populateOrderTable();
   await _populateOrderProductTable();
 };
 

@@ -2,9 +2,8 @@
 const Product = require("./product"); //require the model
 const Customer = require("./customer");
 const Customer_Product = require("./customer_product");
-const Order = require("./order")
+const Order = require("./order");
 const Order_Product = require("./order_product");
-
 
 async function init() {
   await Customer.sync(); //sync the model
