@@ -39,8 +39,10 @@ Here are some questions to cover during your presentations:
    ```
 7. Back in terminal. Run this command to start. `npm start`
 8. You will get a lots of SQL error message. Follow below steps:
-9. `dbinit.js` --- Comment line 9 to 12. Also in `models/index.js`, Comment line 10 to 13. This popupates `product` table.
-10. `dbinit.js` --- Uncomment line 9. Also in `models/index.js`, uncomment line 10. This popupates `customer` table.
-11. `dbinit.js` --- Uncomment line 10. Also in `models/index.js`, uncomment line 11. This popupates `Customer_Product` table.
+9. `dbinit.js` --- Comment line 9 to 12.  This popupates `product` table.
+10. `dbinit.js` --- Uncomment line 9. This popupates `customer` table.
+11. `dbinit.js` --- Uncomment line 10. This popupates `order` table.
+12. `dbinit.js` --- Uncomment line 11. This popupates `customer_product` table.
+13. `dbinit.js` --- Uncomment line 12. This popupates `order_product` table.
 
 
