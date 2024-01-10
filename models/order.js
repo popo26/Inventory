@@ -17,7 +17,9 @@ Order.init(
     customerId: {
       type: DataTypes.INTEGER,
       references: {
-        model: Customer,
+        model: 'customers',
+
+        // model: Customer,
         key: "id",
       },
     },
